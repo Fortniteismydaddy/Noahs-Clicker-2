@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Noah's Clicker 2</title>
+	<style>
+		body {
+			background-color: black;
+			color: white;
+		}
+
+		#clickButton {
+			background-color: red;
+			color: white;
+			font-size: 2em;
+			padding: 20px;
+			border-radius: 10px;
+			cursor: pointer;
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+		}
+
+		#clickButton:active {
+			transform: translate(-50%, -50%) translateX(5px);
+		}
+
+		#counter {
+			font-size: 3em;
+			position: absolute;
+			top: 40%;
+			left: 50%;
+			transform: translateX(-50%);
+		}
+
+		#shopButton {
+			background-color: green;
+			color: white;
+			font-size: 1.5em;
+			padding: 10px;
+			border-radius: 5px;
+			cursor: pointer;
+			position: absolute;
+			top: 70%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+		}
+
+		#autoClickButton {
+			background-color: blue;
+			color: white;
+			font-size: 1.5em;
+			padding: 10px;
+			border-radius: 5px;
+			cursor: pointer;
+			position: absolute;
+			top: 80%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+		}
+	</style>
+</head>
+<body>
+	<h1>Noah's Clicker 2</h1>
+	<p>Click the button as many times as you can!</p>
+	<p id="counter">0</p>
+	<button id="clickButton" onclick="incrementCounter()">Click Me!</button>
+	<button id="shopButton" onclick="buyUpgrade()">Shop - Cost: 100</button>
+	<button id="autoClickButton" onclick="buyAutoClick()">Auto Clicker - Cost: 500</button>
+
+	<script>
+		var counter = 0;
+		var upgradeCost = 100;
+		var upgradeValue = 1;
+		var autoClickCost = 500;
+		var autoClickValue = 0;
+
+		function incrementCounter() {
+			counter += upgradeValue + autoClickValue;
+			document.getElementById("counter").innerHTML = counter;
+		}
+
+		function buyUpgrade() {
+			if (counter >= upgradeCost) {
+				counter -= upgradeCost;
+				upgradeValue++;
+				upgradeCost *= 2;
+				document.getElementById("counter").innerHTML = counter;
+				document.getElementById("shopButton").innerHTML = "Shop - Cost: " + upgradeCost;
+			}
+		}
+
+		function buyAutoClick() {
+			if (counter >= autoClickCost) {
+				counter -= autoClickCost;
+				autoClickValue++;
+				autoClickCost *= 2;
+				document.getElementById("counter").innerHTML = counter;
+				document.getElementById("autoClickButton").innerHTML = "Auto Clicker - Cost: " + autoClickCost;
+				setInterval(incrementCounter, 1000);
+			}
+		}
+	</script>
+</body>
+</html>
